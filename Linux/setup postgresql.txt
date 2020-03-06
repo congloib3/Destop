@@ -1,0 +1,9 @@
+https://tailieu.123host.vn/kb/vps/huong-dan-cai-dat-postgresql-tren-centos-7.html
+https://devops.ionos.com/tutorials/install-postgresql-on-centos-7/
+https://www.hostinger.com/tutorials/how-to-install-postgresql-on-centos-7/
+
+--------remove-------------
+https://kb.objectrocket.com/postgresql/how-to-completely-uninstall-postgresql-757
+
+--------add port 5432---------
+https://www.digitalocean.com/community/questions/remote-access-to-postgresql-with-pgadmin

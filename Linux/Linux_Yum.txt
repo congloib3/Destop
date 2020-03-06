@@ -1,0 +1,94 @@
+﻿yum update
+yum install mc
+yum install screen
+yum install nano
+
+#yum search package-name
+VD: #yum search java
+
+Liệt kê tất cả các gói phần mềm đã được cài đặt trên máy:
+# rpm -qa
+# yum list installed
+
+Hiển thị danh sách các gói phần mềm đã có bản update:
+# yum list updates
+
+Thực hiện nâng cấp tất cả các gói phần mềm:
+
+# yum update
+
+Liệt kê các gói phần mềm với bộ lọc: (vd: samba)
+# rpm -qa | grep samba*
+# yum list installed samba
+
+Kiểm tra xem một gói phần mềm cụ thể đã có bản update mới chưa:
+# yum update package-name
+
+VD: # yum update samba
+
+Tìm kiếm một gói phần mềm lọc theo tên:
+# yum list package-name
+# yum list regex
+
+VD: samba, có thể dùng dấu * để thay thế cho các kí tự chưa xác định
+# yum list samba
+# yum list java*
+
+Cài đặt gói phần mềm cụ thể:
+# yum install package-name-1 package-name-2
+# yum install samba vnc-viewer
+
+Gỡ bỏ gói phần mềm cụ thể:
+# yum remove package-name-1 package-name-2
+# yum remove samba  vnc-viewer
+
+Hiển thị danh sách các gói đang kích hoạt:
+# yum list all
+
+Hiển thị các gói phần mềm theo nhóm:
+# yum grouplist
+
+Cài đặt tất cả các gói phần mềm có trong nhóm:
+# yum groupinstall “Development Tools”
+
+Update tất cả các gói phần mềm có trong nhóm:
+# yum groupupdate “Development Tools”
+
+Gỡ bỏ tất cả các gói phần mềm có trong nhóm:
+# yum groupremove “Development Tools”
+
+Hiển thị các gói phần mềm ko thể cài đặt:
+# yum list extras
+
+Hiển thị thông tin về gói phần mềm của một file cụ thể:
+# yum whatprovides /etc/passwd
+
+Xem trợ giúp thêm về lệnh Yum:
+# man yum
+
+Cài đặt các phần mềm mới nhất thông qua lệnh YUM
+
+Yum là công cụ cài đặt thông dụng trong CentOS. Ưu điểm nổi bật của Yum là tính tự động cao.
+Việc cài đặt thông qua công cụ quản lý gói (YUM) rất dễ sử dụng. Tuy nhiên, tùy theo nguồn nên các phần mềm cài đặt dùng lệnh yum thường không phải là phiên bản mới nhất. Nếu các bạn muốn có các phần mềm mới nhất, mà không cần download source code rồi biên dịch thì có thể làm theo hướng dẫn sau để cập nhật thêm các nguồn tài nguyên cho lệnh yum.Bước 1:
+Mở file  /etc/yum.repos.d/CentOS-Base.repo và chèn đoạn text sau vào cuối dòng:
+[utterramblings]
+    name=Jason’s Utter Ramblings Repo
+baseurl=http://www.jasonlitka.com/media/EL$releasever/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://www.jasonlitka.com/media/RPM-GPG-KEY-jlitka[dag]
+name=Dag RPM Repository for Red Hat Enterprise Linux
+baseurl=http://apt.sw.be/redhat/el$releasever/en/$basearch/dag
+gpgcheck=1
+enabled=1
+Lưu lại.
+
+Bước 2:Nhập khóa GPG để xác thực
+
+# rpm –import http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt
+# rpm –import http://www.jasonlitka.com/media/RPM-GPG-KEY-jlitka
+Thực hiện nâng cấp tất cả các gói phần mềm:
+
+#  yum update
+Thế là xong! từ nay các bạn sẽ có các phần mềm mới nhất khi cài đặt từ lệnh yum.
+

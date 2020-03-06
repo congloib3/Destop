@@ -1,0 +1,2 @@
+﻿ex : 
+sudo yum remove nodejs

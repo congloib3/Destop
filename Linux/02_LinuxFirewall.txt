@@ -1,0 +1,86 @@
+﻿show iptables
+sudo iptables -S
+
+1. Mở port 1521 :
+
+iptables -I INPUT 1 -p tcp --dport 1521 -j ACCEPT
+iptables -I INPUT 1 -p tcp --dport 1158 -j ACCEPT
+iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
+
+iptables -I INPUT 1 -p tcp --dport 3306 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+
+iptables -A INPUT -p tcp --dport 1158 -j ACCEPT
+service iptables restart
+
+iptables -I INPUT 1 -p tcp --dport 1521 -j ACCEPT
+
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 1521 -j ACCEPT
+Sau đó lưu lại cấu hình và khởi động lại iptables
+service iptables save
+service iptables restart
+
+
+Để đóng port bất kỳ,chỉnh sửa trực tiếp file /etc/sysconfig/iptables, comment những dòng có port cần đóng.
+nano /etc/sysconfig/iptables
+Sau đó lưu lại cấu hình và khởi động lại iptables
+
+service iptables save
+service iptables restart
+
+Kiểm tra lại port đang mở
+iptables -L -n
+
+Xem thêm :http://docs.gocloud.vn/mo-port-va-chan-port-tren-linux/
+
+
+
+Một số port phổ biến thường được sử dụng:
+TCP port 80 – HTTP Server
+TCP port 443 – HTTPS Server
+TCP port 25 – Mail Server
+TCP port 22 – OpenSSH (remote) secure shell server
+TCP port 110 – POP3 (Post Office Protocol v3) server
+TCP port 143 – Internet Message Access Protocol (IMAP) - Management of email messages
+TCP / UDP port 53 – Domain Name System (DNS)
+Bạn có thể sử dụng lênh nano /etc/servicesđể xem danh sách các port
+1.     Khóa cổng vào (Block Incoming Port)
+ 	
+/sbin/iptables -A INPUT -p tcp --destination-port {PORT-NUMBER-HERE} -j DROP
+ 
+### interface section use eth1 ###
+/sbin/iptables -A INPUT -i eth1 -p tcp --destination-port {PORT-NUMBER-HERE} -j DROP
+ 
+### only drop port for given IP or Subnet ##
+/sbin/iptables -A INPUT -i eth0 -p tcp --destination-port {PORT-NUMBER-HERE} -s {IP-ADDRESS-HERE} -j DROP
+/sbin/iptables -A INPUT -i eth0 -p tcp --destination-port {PORT-NUMBER-HERE} -s {IP/SUBNET-HERE} -j DROP
+Ví dụ: Để khóa imcoming port 80 (HTTP server), ta sử dụng lệnh sau:
+ 	
+/sbin/iptables -A INPUT -p tcp --destination-port 80 -j DROP
+/sbin/service iptables save
+Để khóa port 80 với tất cả IP, chỉ cho duy nhất IP có địa chỉ 10.7.3.2 truy cập
+ 	
+/sbin/iptables -A INPUT -p tcp -i eth1 -s ! 10.7.3.2 --dport 80 -j DROP
+2.     Khóa cổng ra (Block Outgoing Port)
+ 	
+/sbin/iptables -A OUTPUT -p tcp --dport {PORT-NUMBER-HERE} -j DROP
+ 
+### interface section use eth1 ###
+/sbin/iptables -A OUTPUT -i eth1 -p tcp --dport {PORT-NUMBER-HERE} -j DROP
+ 
+### only drop port for given IP or Subnet ##
+/sbin/iptables -A OUTPUT -i eth0 -p tcp --destination-port {PORT-NUMBER-HERE} -s {IP-ADDRESS-HERE} -j DROP
+/sbin/iptables -A OUTPUT -i eth0 -p tcp --destination-port {PORT-NUMBER-HERE} -s {IP/SUBNET-HERE} -j DROP
+Ví dụ: Để khóa outgoing port 25, ta sử dụng lệnh sau:
+ 	
+/sbin/iptables -A OUTPUT -p tcp --dport 25 -j DROP
+/sbin/service iptables save
+Để khóa outgoing port 279 đối với IP 10.7.3.5, sử dụng lệnh sau:
+ 	
+/sbin/iptables -A OUTPUT -p tcp -d 10.7.3.5 --dport 279 -j DROP
+/sbin/service iptables save

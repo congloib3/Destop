@@ -1,0 +1,6 @@
+-Controller:
+	ActionResult: lop cha render tat ca cac thuoc tinh.
+	ViewResult: render lop view.
+	JsonResult: render du lieu json.
+-ViewBag: thuoc tinh dynamid, co the gan gia' tri vao no
+-ViewRazor

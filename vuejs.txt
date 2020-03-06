@@ -1,0 +1,62 @@
+https://github.com/vuejs/vue-router/issues/713
+https://stackoverflow.com/questions/45565349/how-to-acces-external-json-file-objects-in-vue-js-app
+http://www.codekayak.net/load-json-data-component-vue/
+https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null
+npm install --save-dev webpack
+https://marozed.ma/vue-cheatsheet/
+https://vuejsexamples.com/
+
+syntax:
+
+$EMIT: gui su kien tu con -> cha(lang nghe su kien)
+
+=> component con: this.$emit('ten tu dat', this.'data1');
+
+=> component cha: @ten tu dat="data2 = $event"
+
+-----------------------------------------------------------------------
+
+$PROPS: truyen du lieu tu cha -> com
+
+=> component hung':   props: ['ten data']
+
+=> component truyen:  :ten data="name" 
+
+----------------------------------------------------------------------
+CALLBACK FUNCTION=emit: cpn con hung' fuction tu cpn cha
+
+=> component cha:    :ten tudat="ten function"
+
+=> component con:  props:{
+	ten tudat:Function
+}
+-----------------------------------------------------------------------
+phuong thuc bus giua 2 component con =event bus:
+
+1. main.js =>:
+
+export const tenBustudat = new Vue(); //create a bus
+
+2. component 1 =>:
+
+import {tentudat} from '.main.js'
+
+tenBustudat.$emit('tenSKtudat',this.data);   //diem bat dau
+
+3. component 2 =>:
+
+import {tentudat} from '.main.js'
+
+created(){
+	tenBustudat.$on('tenSKtudat', (param)=>{
+		this.data=param;
+})
+}
+------------------------------------------------------------------------
+component con :<slot name="name"></slot>
+component cha: vd tag p <p slot="name">hello</p>
+	--------------------------
+<component :is="ten component"></component>
+
+
+

@@ -1,0 +1,2 @@
+﻿http://www.tecmint.com/install-apache-mysql-php-on-redhat-centos-fedora/
+http://sharadchhetri.com/2014/03/24/install-xampp-centosrhel-6-5/

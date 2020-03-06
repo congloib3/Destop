@@ -1,0 +1,29 @@
+1. mkdir -p /var/www/example.com/public_html
+2. chown -R $USER:$USER /var/www/example.com/public_html
+3. chmod -R 755 /var/www
+4. nano /var/www/example.com/public_html/index.html
+5. mkdir /etc/httpd/sites-available
+    mkdir /etc/httpd/sites-enabled
+6. nano /etc/httpd/conf/httpd.conf    
+   Add this line to the end of the file:
+
+   IncludeOptional sites-enabled/*.conf
+7. nano /etc/httpd/sites-available/example.com.conf
+   <VirtualHost *:80>
+
+    ServerName www.example.com
+    ServerAlias example.com
+    DocumentRoot /var/www/example.com/public_html
+    ErrorLog /var/www/example.com/error.log
+    CustomLog /var/www/example.com/requests.log combined
+</VirtualHost>
+8. ln -s /etc/httpd/sites-available/example.com.conf /etc/httpd/sites-enabled/example.com.conf
+9. apachectl restart
+10. nano /etc/hosts
+     127.0.0.1   localhost
+    127.0.1.1   guest-desktop
+    server_ip_address example.com
+    server_ip_address example2.com		
+11. Done
+-----------------link--------------------------
+https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-centos-7

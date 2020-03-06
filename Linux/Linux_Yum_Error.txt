@@ -1,0 +1,9 @@
+﻿khi yum install một phần mềm bị lỗi
+ex :
+......
+You could try using --skip-broken to work around the problem
+
+......
+
+Chạy lệnh yum clean all để xứ lý , nhất là xóa mấy cái cache có thể gây lỗi
+You've installed the wrong version of EPEL on your CentOS 7 machine. Run yum remove epel-release then yum --enablerepo=extras install epel-release then yum clean all and then try again.

@@ -1,0 +1,14 @@
+1. yum update
+2. yum install httpd
+3. systemctl start httpd
+4. systemctl enable httpd
+5. systemctl status httpd
+6. firewall-cmd --permanent --add-port=80/tcp
+7. firewall-cmd --reload
+8. run
+
+
+
+-------------------remove apache----------------------
+
+https://www.youtube.com/watch?v=Iff2Eis4OFE
